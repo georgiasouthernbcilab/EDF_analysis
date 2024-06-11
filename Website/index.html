@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MNE Python Data Processing</title>
+    <meta name="description" content="Learn how to process data using MNE Python">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/mystyle.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <h1>Welcome to the Georgia Southern BCI lab's homepage!</h1>
+    <p>
+        If it's your first time here, please start with the <a href="introduction.html">Introduction</a> to get familiar with MNE Python. <br>
+        If you haven't installed MNE Python yet, please visit <a href="installation.html">the Installation page</a>. 
+    </p>
+
+    <h2>Recommended Processing Workflow:</h2>
+    <ol type="1">
+        <li>Preprocessing Data</li>
+            <ol type="1">
+                <li>Raw Data Plotting (for frequent comparison to current data)</li>
+                <li>Artifact Removal (ICA very applicable to EEG)</li>
+                <li>Eye Blink Removal (using ICA and EOG channels near the eyes)</li>
+                <li>Filtering: Bandpass filtering can be performed initially or here</li>
+                <li>Epoching: Segment the data into the sections we want</li>
+                <li>Baseline Correction: Determine how we want to apply a baseline to our different "events"</li>
+            </ol>
+        <li>Data Analysis</li>
+            <ol type="1">
+                <li>Time-Frequency Analysis</li>
+                <li>Power Spectral Density (PSD) Calculation</li>
+                <li>Current Source Density (CSD) Calculation</li>
+                <li>Source Localization</li>
+                <li>Statistical Analysis</li>
+            </ol>
+        <li>Visualization</li>
+            <ol type="1">
+                <li>Raw Data Plotting</li>
+                <li>ERP/ERF Plotting</li>
+                <li>Topographic Maps</li>
+                <li>Electrode PSD</li>
+                <li>PSD Plotting</li>
+                <li>CSD Visualizations</li>
+                <li>Time-Frequency Maps</li>
+            </ol>
+    </ol>
+
+    <h2>Configuration</h2>
+    <p>
+        To effectively process data using MNE Python in the exact same way as us, please ensure your Environment contains the following:
+        <ul>
+            <li>MNE python version: </li>
+            <li>Python Version: 3.12.8</li>
+            <!-- <li></li>
+            <li></li>
+            <li></li> -->
+            <li>Optional: Additional libraries for advanced analysis (e.g., scikit-learn, matplotlib)</li>
+        </ul>
+        If you find you cannot duplicate our results, you may need to manually specify these dependencies, or create an isolated virtual environment (provided at: HTML link)
+    </p>
+
+    <!-- <p>For detailed grading criteria, refer to <a href="../media/documents/grading-schema.pdf">Project Grading Schema</a>.</p> -->
+
+    <script src="script.js"></script>
+</body>
+</html>
