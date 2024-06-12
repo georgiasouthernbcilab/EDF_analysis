@@ -3,66 +3,127 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MNE Python Data Processing</title>
-    <meta name="description" content="Learn how to process data using MNE Python">
+    <title></title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/mystyle.css">
 </head>
 <body>
     <div id="navbar-container"></div>
-    <h1>Welcome to the Georgia Southern BCI lab's homepage!</h1>
+    <h1>Welcome!</h1>
     <p>
-        If it's your first time here, please start with the <a href="introduction.html">Introduction</a> to get familiar with MNE Python. <br>
-        If you haven't installed MNE Python yet, please visit <a href="installation.html">the Installation page</a>. 
-    </p>
+        If it's your first time here, please stop by the <a href="introduction.html">Introduction page.</a> <br>
+        If you don't have your software yet, pleast visit <a href="software\software.html">the software page.</a> 
 
-    <h2>Recommended Processing Workflow:</h2>
+    </p>
+    <p>
+    </p>
+    <h2>It is recommended that you complete the project in the following order:</h2>
+<ol type="1">
+    <li><a href="../vmware\installingvms.html">Install Operating Systems</a></li>
     <ol type="1">
-        <li>Preprocessing Data</li>
-            <ol type="1">
-                <li>Raw Data Plotting (for frequent comparison to current data)</li>
-                <li>Artifact Removal (ICA very applicable to EEG)</li>
-                <li>Eye Blink Removal (using ICA and EOG channels near the eyes)</li>
-                <li>Filtering: Bandpass filtering can be performed initially or here</li>
-                <li>Epoching: Segment the data into the sections we want</li>
-                <li>Baseline Correction: Determine how we want to apply a baseline to our different "events"</li>
-            </ol>
-        <li>Data Analysis</li>
-            <ol type="1">
-                <li>Time-Frequency Analysis</li>
-                <li>Power Spectral Density (PSD) Calculation</li>
-                <li>Current Source Density (CSD) Calculation</li>
-                <li>Source Localization</li>
-                <li>Statistical Analysis</li>
-            </ol>
-        <li>Visualization</li>
-            <ol type="1">
-                <li>Raw Data Plotting</li>
-                <li>ERP/ERF Plotting</li>
-                <li>Topographic Maps</li>
-                <li>Electrode PSD</li>
-                <li>PSD Plotting</li>
-                <li>CSD Visualizations</li>
-                <li>Time-Frequency Maps</li>
-            </ol>
+        <li>Windows Server</li>
+        <li>Windows 10</li>
+        <li>Ubuntu</li>
+        <li>Update all operating systems (at home, it takes a while)</li>
     </ol>
+    <li>Windows 10</li>
+        <ol type="1">
+            <li><a href="../windows\disableuac.html">Disable UAC (If needed for your startup method)</a></li>
+            <li><a href="../windows\installwamp.html">Install Wamp</a></li>
+            <li><a href="../windows\editconffiles.html">Configure Wamp</a></li>
+            <li><a href="../windows\installjoomla.html">Install Joomla</a></li>
+            <li>Customize your Joomla (at home, no instructions as everyone's will be different!)</li>
+            <li><a href="../windows\akeebabackup.html">Backup Joomla</a></li>
+            <li><a href="../windows\windowsfirewall.html">Open Firewall for outside access</a></li>
+        </ol>
+    <li>Ubuntu</li>
+        <ol type="1">
+            <li><a href="../ubuntu\installxampp.html">Install XAMPP</a></li>
+            <li><a href="../ubuntu\restorejoomla.html">Restore Joomla</a> (windows 10 PC must be open with Wamp server running, the correct ports open, and you must know the IP address to navigate to the WAMP server, and the backup location on the Wamp server.)</li>
+            <!-- <li>Configure firewall if needed for remote site access</li> -->
+        </ol>
+    <li>Windows Server</li>
+        <ol type="1">
+            <li><a href="../windowsserver\setstaticip.html">Set static IP</a></li>
+            <li><a href="../windowsserver/addservices.html">Add services</a></li>
+            <li><a href="../windowsserver/configuredhcp.html">Configure DHCP scope</a></li>
+        </ol>
+    <li>Active Directory / Windows Server</li>
+        <ol type="1">
+            <li><a href="../windows\addwindowstoad.html">Add Windows to AD</a></li>
+            <li><a href="../ubuntu\addtoad.html">Add Ubuntu to AD</a></li>
+        </ol>
+</ol>
 
     <h2>Configuration</h2>
     <p>
-        To effectively process data using MNE Python in the exact same way as us, please ensure your Environment contains the following:
+        The project will require the following to be installed, configured, and operational:
         <ul>
-            <li>MNE python version: </li>
-            <li>Python Version: 3.12.8</li>
-            <!-- <li></li>
-            <li></li>
-            <li></li> -->
-            <li>Optional: Additional libraries for advanced analysis (e.g., scikit-learn, matplotlib)</li>
+            <li>Windows</li>
+                <ul>
+                    <li>WAMP with website (Joomla as a CMS with customizations)</li>
+                    <li>Connected to AD</li>
+                </ul>
+            <li>Ubuntu</li>
+                <ul>
+                    <li>XAMPP with WAMP backup</li>
+                    <li>Connected to AD</li>
+                </ul>
+            <li>Windows Server</li>
+                <ul>
+                    <li>Active Directory</li>
+                    <li>DHCP</li>
+                    <li>DNS</li>
+                </ul>
         </ul>
-        If you find you cannot duplicate our results, you may need to manually specify these dependencies, or create an isolated virtual environment (provided at: HTML link)
+        
     </p>
+<p><a href="../media\documents\Hard Drive Assignment-Schema.pdf">View Project Grading Schema</a></p>
+    <!-- <h2>Bounty Program</h2>
+    <p> Removed / commented out</p> -->
+    <!-- <p>As incentive for actively contributing to the improvement of this project, a bounty program is in place, pull requests will be accepted for everything, including:</p>
+    <ul>
+        <li>minor corrections</li>
+        <li>process improvement</li>
+        <li>fixing any major error in the process</li>
+    </ul>
+    <p>Contributors can accumulate points based on their contributions, providing an additional incentive for engagement in the project.  Simply submit a pull request at: </p>
 
-    <!-- <p>For detailed grading criteria, refer to <a href="../media/documents/grading-schema.pdf">Project Grading Schema</a>.</p> -->
+    <p>Note: Some employers have been requesting GitHub profile links during job applications.  Having a GitHub
+        profile and actively contributing to the community by submitting bug reports, pull requests, and contributing your own code can be an asset on your job application!
+    </p> -->
+    <!-- <h2>Bounty Program</h2>
+    <p>As incentive for actively contributing to the improvement of this project, a bounty program is in place:</p>
+    <ul>
+        <li> __ points for minor corrections</li>
+        <li> __ points for process improvement</li>
+        <li> __ points for fixing any major error in the process</li>
+    </ul>
+    <p>Contributors can accumulate points based on their contributions, providing an additional incentive for engagement in the project.  Simply submit a pull request at: </p>
+
+    <p>Note: Some employers have been requesting GitHub profile links during job applications.  Having a GitHub
+        profile and actively contributing to the community by submitting bug reports, pull requests, and contributing your own code can be an asset on your job application!
+    </p> -->
+
+
+<!-- Overview of Bounty Programs in the IT Industry -->
+
+    <!-- <h2>Overview of Bounty Programs in the IT Industry</h2>
+    <p>Commented out</p> -->
+    <!-- <p>Bounty programs are widely utilized in the IT industry as a proactive approach to identify and address security vulnerabilities, enhance software quality, and promote community collaboration. These programs, often known as bug bounty programs, invite ethical hackers, security researchers, and developers to discover and report issues within software or systems.
+    Common features of IT bounty programs include:</p>
+    <ul>
+        <li>Financial incentives for identifying and responsibly disclosing security vulnerabilities.</li>
+        <li>Recognition and rewards for valuable contributions to the improvement of software or system functionality.</li>
+        <li>Community engagement, fostering collaboration and knowledge sharing among contributors.</li>
+        <li>Continuous improvement of software security and robustness through the collective efforts of a diverse group of contributors.</li>
+    </ul>
+    <p>Such programs have become integral to the cybersecurity landscape, offering a win-win scenario for organizations seeking to fortify their systems and for individuals looking to showcase their skills while earning rewards.</p> -->
+
 
     <script src="script.js"></script>
+    <!-- <script src="/script.js"></script> -->
+    <!-- https://it-infrastructure-course.github.io/harddrive.github.io/ -->
 </body>
 </html>

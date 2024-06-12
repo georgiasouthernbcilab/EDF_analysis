@@ -11,17 +11,36 @@
 <body>
     <div id="navbar-container"></div>
     <!-- Include the navbar using JavaScript -->
-      While using Git, you will invariably encounter errors!  Here are some common errors and solutions:
-      <ul>
-        <li>remote: error: See https://gh.io/lfs for more information.
-          remote: error: File Website/_/fastinstallwamp.zip is 450.30 MB; this exceeds GitHub's file size limit of 100.00 MB</li>
+<h2>GitHub Common Issues</h2>
+
+<h3>File size too large</h3>
+<p>
+PS E:\WEBSITE\EDF_analysis> git push origin HEAD <br>
+Enumerating objects: 40, done.<br>
+Counting objects: 100% (40/40), done.<br>
+Delta compression using up to 8 threads<br>
+Compressing objects: 100% (34/34), done.<br>
+Writing objects: 100% (38/38), 451.02 MiB | 753.00 KiB/s, done.<br>
+Total 38 (delta 7), reused 0 (delta 0), pack-reused 0<br>
+remote: Resolving deltas: 100% (7/7), completed with 1 local object.<br>
+remote: error: Trace: 0c137f9a8350e83fccd5c1936c2da9120349497e908521007d2421696e6292b5<br>
+remote: error: See https://gh.io/lfs for more information.<br>
+remote: error: File Website/_/fastinstallwamp.zip is 450.30 MB; this exceeds GitHub's file size limit of 100.00 MB<br>
+remote: error: File Website/_/finalinstallwamp.zip is 108.10 MB; this exceeds GitHub's file size limit of 100.00 MB<br>
+remote: error: File Website/_/installwamp.zip is 451.08 MB; this exceeds GitHub's file size limit of 100.00 MB<br>
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.<br>
+To https://github.com/georgiasouthernbcilab/EDF_analysis<br>
+ ! [remote rejected] HEAD -> main (pre-receive hook declined)<br>
+error: failed to push some refs to 'https://github.com/georgiasouthernbcilab/EDF_analysis'<br>
+</p>
           <ol> To fix, do:
-            <li></li>
+            <li>Save working changes in other directory</li>
+            <li>Delete local repository and re-download from GitHub</li>
+            <li>Move your modified files back into the repo & push</li>
           </ol>
-        <li>git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch Website/_/fastinstallwamp.zip Website/_/finalinstallwamp.zip Website/_/installwamp.zip' --prune-empty --tag-name-filter cat -- --all
-        </li>
-        <li></li>
-      </ul>
+<p>
+  Oftentimes, after accidentally adding a large file, the changes are still in the local .git file, and will cause continuous issues until resolved.  You can attempt to clean the working tree / stash changes aswell, but this is sometimes the most straight forward.
+</p>
     
       <script src="../script.js" async defer></script>
     </body>
