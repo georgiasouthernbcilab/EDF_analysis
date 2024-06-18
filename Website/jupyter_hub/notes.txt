@@ -1,0 +1,15 @@
+to install for all users, first go to:
+terminal
+sudo su - this changes to root, could try any other user too
+
+TODO: https://tljh.jupyter.org/en/latest/topic/three-environments.html
+If you would do sudo /opt/tljh/user/bin/python3 -m pip install <something>, or from a user server’s terminal do sudo -E pip install <something> you would end up installing something in the user environment, and that would not be available in the system’s Python environment or the hub environment.
+
+science@raspberrypi:~ $ voila ~/voila_notebooks --no-browser --port=8867 --strip_sources=False --Voila.ip=0.0.0.0
+[Voila] Using /tmp to store connection files
+[Voila] Storing connection files in /tmp/voila_ido7elw1.
+[Voila] Serving static files from /home/science/.local/lib/python3.9/site-packages/voila/static.
+[Voila] The port 8867 is already in use, trying another port.
+[Voila] The port 8868 is already in use, trying another port.
+[Voila] Voilà is running at:
+http://raspberrypi:8869

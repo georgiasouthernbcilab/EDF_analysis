@@ -1,0 +1,15 @@
+science@raspberrypi:~ $ voila ~/voila_notebooks --no-browser --port=8867 --strip_sources=False --Voila.ip=0.0.0.0
+[Voila] Using /tmp to store connection files
+[Voila] Storing connection files in /tmp/voila_ido7elw1.
+[Voila] Serving static files from /home/science/.local/lib/python3.9/site-packages/voila/static.
+[Voila] The port 8867 is already in use, trying another port.
+[Voila] The port 8868 is already in use, trying another port.
+[Voila] Voilà is running at:
+http://raspberrypi:8869/
+
+
+
+[Voila] Serving static files from /home/science/.local/lib/python3.9/site-packages/voila/static.
+
+/home/science/Desktop
+
