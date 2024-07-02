@@ -39,7 +39,7 @@ def plot_psd(edf_file, output_directory):
         raw.filter(l_freq=1, h_freq=40)
 
         # Set up ICA
-        ica = ICA(n_components=32, random_state=97, max_iter="auto")
+        ica = ICA(n_components=32, random_state=97, max_iter=800)
         ica.fit(raw)
 
         # Find EOG and muscle artifacts

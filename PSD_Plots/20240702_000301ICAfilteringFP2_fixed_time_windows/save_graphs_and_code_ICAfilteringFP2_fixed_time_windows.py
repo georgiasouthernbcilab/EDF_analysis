@@ -39,7 +39,7 @@ def plot_psd(edf_file, output_directory):
         raw.filter(l_freq=1, h_freq=40)
 
         # Set up ICA
-        ica = ICA(n_components=32, random_state=97, max_iter="auto")
+        ica = ICA(n_components=32, random_state=97, max_iter=800)
         ica.fit(raw)
 
         # Find EOG and muscle artifacts
@@ -82,8 +82,8 @@ def plot_psd(edf_file, output_directory):
             ## EDIT: On 7/2/24 I discovered different time periods.  Made it all relative to the obvserved marker.  Matches with stimplip started in .csv file
             ## NOTE: edited here
             ## TODO: Confirm everything here is correct
-            start = start + 15
-            stop = start + 45
+            start = start + 30
+            stop = start + 30
             print(f'\n\n\n\n\n\n\n\n\n\n\n\n\nstart time:{start}  end time:{stop}\n\n\n\n\n\n\n\n\n\n\n')
             # Crop the raw data to the event span
             cropped_raw = raw_clean.copy().crop(tmin=start, tmax=stop)

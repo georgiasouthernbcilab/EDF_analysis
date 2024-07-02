@@ -6,7 +6,7 @@ from datetime import datetime # To time & date stamp output files as needed
 import re # To sanitize filename
 from mne.preprocessing import ICA # Import it explicitly to minimize required code and refer to it more easily
 
-description = 'ICAfilteringFP2_fixed_time_windows' # Put a nice description here as it gets saved in the output directory name and code output file
+description = 'ICAfilteringFP2' # Put a nice description here as it gets saved in the output directory name and code output file
 eeg_channels = ['Cz', 'Fz', 'Fp1', 'F7', 'F3', 'FC1', 'C3', 'FC5', 'FT9', 'T7', 'CP5', 'CP1', 'P3', 'P7', 'PO9', 'O1', 'Pz', 'Oz', 'O2', 'PO10', 'P8', 'P4', 'CP2', 'CP6', 'T8', 'FT10', 'FC6', 'C4', 'FC2', 'F4', 'F8', 'Fp2']
 
 def sanitize_filename(filename):
@@ -39,7 +39,7 @@ def plot_psd(edf_file, output_directory):
         raw.filter(l_freq=1, h_freq=40)
 
         # Set up ICA
-        ica = ICA(n_components=32, random_state=97, max_iter="auto")
+        ica = ICA(n_components=32, random_state=97, max_iter=800)
         ica.fit(raw)
 
         # Find EOG and muscle artifacts
@@ -78,12 +78,6 @@ def plot_psd(edf_file, output_directory):
             
             # Define the time span for the event
             start, stop = event[0] / raw.info['sfreq'], min((event[0] + raw.n_times) / raw.info['sfreq'], raw.times[-1])
-            
-            ## EDIT: On 7/2/24 I discovered different time periods.  Made it all relative to the obvserved marker.  Matches with stimplip started in .csv file
-            ## NOTE: edited here
-            ## TODO: Confirm everything here is correct
-            start = start + 15
-            stop = start + 45
             print(f'\n\n\n\n\n\n\n\n\n\n\n\n\nstart time:{start}  end time:{stop}\n\n\n\n\n\n\n\n\n\n\n')
             # Crop the raw data to the event span
             cropped_raw = raw_clean.copy().crop(tmin=start, tmax=stop)
