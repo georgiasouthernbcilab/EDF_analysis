@@ -48,7 +48,7 @@ def read_edf(edf_file_path, save_dir):
             raw_segment = raw.copy().crop(tmin=onset, tmax=end_time)
             raw_segment.filter(l_freq = 1, h_freq = 40)
             
-            ica = ICA(n_components=20, random_state=97, max_iter=800)
+            ica = ICA(n_components=32, random_state=97, max_iter=800)
             ica.fit(raw_segment)
             eog_indices, eog_scores = ica.find_bads_eog(raw, ch_name=['Fp1', 'Fp2'])
             ica.exclude = eog_indices
