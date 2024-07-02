@@ -61,7 +61,6 @@ if annot_muscle is not None:
 
 # Extract events from annotations (if available)
 
-
 # events_from_annot = mne.events_from_annotations(raw, event_id=None, use_rounding=False)[0]
 
 # Plot raw and cleaned data with annotations and events
