@@ -1,107 +1,153 @@
 import mne
+from mne.preprocessing import ICA
+from mne.preprocessing import create_ecg_epochs, create_eog_epochs
 import matplotlib.pyplot as plt
+from pathlib import Path
+from imports.message_user import show_message_plot
+import numpy as np
 
-# Define EEG channels and frequencies of interest
+# Let's define some basics right here
+visualize_difference = True
+apply_projection = True
+
+
+# Define EEG channels
 eeg_channels = ['Cz', 'Fz', 'Fp1', 'F7', 'F3', 'FC1', 'C3', 'FC5', 'FT9', 'T7', 'CP5', 'CP1', 'P3', 'P7', 'PO9', 'O1', 'Pz', 'Oz', 'O2', 'PO10', 'P8', 'P4', 'CP2', 'CP6', 'T8', 'FT10', 'FC6', 'C4', 'FC2', 'F4', 'F8', 'Fp2']
+# Frequencies of interest for EEG analysis
+freqs = {
+    'delta': (0.5, 4),
+    'theta': (4, 8),
+    'alpha': (8, 13),
+    'beta': (13, 30),
+    'gamma': (30, 40)
+}
+
+# Create array of frequencies
+freqs_array = []
+for band in freqs.values():
+    freqs_array += list(range(int(band[0]), int(band[1]) + 1))
 
 # Read your EDF file
-raw = mne.io.read_raw_edf(r'EDF+\Zacker\Zacker.edf', eog=['fp1', 'fp2'], preload=True, infer_types=True)
+raw = mne.io.read_raw_edf(r'EDF+\Zacker\Zacker.edf', preload=True, infer_types=True)
 
 # Select only EEG channels
-raw.pick_channels(eeg_channels)  # Explicitly pick EEG channels to avoid picking other channels
+raw.pick(eeg_channels)  # Explicitly pick EEG channels to avoid picking other channels
+print(raw.info)
 
 # Set montage
 montage = mne.channels.make_standard_montage('standard_1020')
 raw.set_montage(montage, on_missing='ignore')
 
+
+# Define your message and instructions
+message = "Pick bads"
+instructions = """
+1. Please review the data.
+2. Make note of any anomalies.
+3. Use the toolbar to zoom and pan.
+4. Press A on your keyboard to annotate.
+5. Close this window to proceed.
+NOTE: The home, end, page up, page down,
+and arrow keeys all do special functions too
+"""
+# Display the message plot
+show_message_plot(message, instructions)
+
 # Apply preprocessing steps
-raw.set_eeg_reference('average', projection=True)  # Set EEG average reference
-raw.apply_proj()  # Apply projections
+raw.set_eeg_reference('average', ch_type = 'eeg', projection=apply_projection)  # Set EEG average reference, NOTE: must be applied later!
+if apply_projection:
+    raw.apply_proj() # MUST be applied or it doesn't work!
+raw.filter(l_freq=1, h_freq=40)  # Apply band-pass filter
+raw.plot(picks=eeg_channels,block=True)
 
-# Apply band-pass filter
-raw.filter(l_freq=1, h_freq=40)
 
-raw.plot(block=True)
-# Interpolate bad channels
-raw_interpolated = raw.copy().interpolate_bads(method='spline')
-raw.plot(block=False)
-raw_interpolated.plot(block=True)
-# Compute and plot PSD (Power Spectral Density)
-raw_interpolated.plot_psd(fmin=0.5, fmax=40, average=False, spatial_colors=False)
 
-# Plot original and interpolated data for comparison
-orig_data = raw.get_data() * 1e6  # Original data in microvolts
-interp_data = raw_interpolated.get_data() * 1e6  # Interpolated data in microvolts
+# Define your message and instructions
+message = "Now Interpolating!"
+instructions = """
+1. Please wait while I interpolate!
+2. You may wish to view a before and after
+NOTE: The home, end, page up, page down,
+and arrow keeys all do special functions too
+"""
+# Display the message plot
+show_message_plot(message, instructions)
 
+# Interpolate bads
+print(f'bads: {raw.info["bads"]}')
+# raw_interpolated = raw.copy().interpolate_bads(reset_bads=False)# NOTE: Reset bads = false keeps the bads in the data, just different color!!!
+raw_interpolated = raw.copy().interpolate_bads(method='spline')# NOTE: Reset bads = false keeps the bads in the data, just different color!!!
+raw_interpolated.plot(picks = eeg_channels ,block=True, title='Interpolated bads')
+
+# Compute and plot PSD
+raw_interpolated.compute_psd().plot()
+plt.show(block=True)
+print('Showed interpolated plot')
+# Extract data for plotting
 times = raw.times * 1e3  # Convert to milliseconds
-
-plt.figure(figsize=(15, 10))
-for idx, ch_name in enumerate(eeg_channels):
-    plt.plot(times, orig_data[idx] + idx * 100, color='blue', label='Original' if idx == 0 else '')
-    plt.plot(times, interp_data[idx] + idx * 100, color='red', linestyle='--', label='Interpolated' if idx == 0 else '')
-
-plt.xlabel('Time (ms)')
-plt.ylabel('Amplitude (µV)')
-plt.legend(loc='upper right')
-plt.title('Original vs Interpolated EEG Data')
-plt.yticks([i * 100 for i in range(len(eeg_channels))], eeg_channels)
-plt.tight_layout()
-plt.show()
+data_orig = raw.get_data() * 1e6  # Convert to microvolts
+data_interp = raw_interpolated.get_data() * 1e6  # Convert to microvolts
 
 
-# import mne
-# from mne.preprocessing import ICA  # Import it explicitly to minimize required code and refer to it more easily
+if visualize_difference:
+    # Plot original and interpolated data
+    fig, ax = plt.subplots(figsize=(15, 10))
+    for ch_idx, ch_name in enumerate(eeg_channels):
+        ax.plot(times, data_orig[ch_idx] + ch_idx * 100, color='blue', label='Original' if ch_idx == 0 else "")
+        ax.plot(times, data_interp[ch_idx] + ch_idx * 100, color='red', linestyle='--', label='Interpolated' if ch_idx == 0 else "")
 
+    ax.set_xlabel('Time (ms)')
+    ax.set_ylabel('Amplitude (µV)')
+    ax.legend(loc='upper right')
+    ax.set_title('Original vs Interpolated EEG Data')
+    ax.set_yticks([i * 100 for i in range(len(eeg_channels))])
+    ax.set_yticklabels(eeg_channels)
+    plt.tight_layout()
+    plt.show(block=True)
+print('Visualized difference')
 
-# ## Definitions:
+# # Create virtual EOG channel
+# eog_data = raw.copy().pick_channels(['Fp1', 'Fp2']).get_data()
+# virtual_eog = eog_data[0] - eog_data[1]  # Difference between Fp1 and Fp2
+# info = mne.create_info(ch_names=['EOG'], sfreq=raw.info['sfreq'], ch_types=['eog'])
+# virtual_eog_raw = mne.io.RawArray(virtual_eog[np.newaxis, :], info)
 
-# # Define eeg channels for when we need to pass them explicitly as arguments
-# eeg_channels = ['Cz', 'Fz', 'Fp1', 'F7', 'F3', 'FC1', 'C3', 'FC5', 'FT9', 'T7', 'CP5', 'CP1', 'P3', 'P7', 'PO9', 'O1', 'Pz', 'Oz', 'O2', 'PO10', 'P8', 'P4', 'CP2', 'CP6', 'T8', 'FT10', 'FC6', 'C4', 'FC2', 'F4', 'F8', 'Fp2']
-# eog_channels=['Fp1', 'Fp2']
+# plt.tight_layout()
+# plt.show(block=True)
+eog_events = mne.preprocessing.find_eog_events(raw,ch_name=['Fp1','Fp2'])
+n_blinks = len(eog_events)
+# Center to cover the whole blink with full duration of 0.5s:
+onset = eog_events[:, 0] / raw.info['sfreq'] - 0.25
+duration = np.repeat(0.5, n_blinks)
+annotations = mne.Annotations(onset, duration, ['bad blink'] * n_blinks,
+                                  orig_time=raw.info['meas_date'])
+raw.set_annotations(annotations)
+raw.plot(events=eog_events,block=True)  # To see the annotated segments.
+print('Plotted events difference')
 
+#method : ``'morlet'`` | ``'multitaper'`` | None
+#     freqs : array-like | None
+        # The frequencies at which to compute the power estimates.
+        # Must be an array of shape (n_freqs,). ``None`` (the
+        # default) only works when using ``__setstate__`` and will raise an error otherwise.
+        #tmin, tmax : float | None
+        #
+# raw_interpolated.compute_tfr(method='multitaper',freqs=) #  
+# method: Any,
+#     freqs: Any,
+#     *,
+#     tmin: Any | None = None,
+#     tmax: Any | None = None,
+#     picks: Any | None = None,
+#     proj: bool = False,
+#     output: str = "power",
+#     reject_by_annotation: bool = True,
+#     decim: int = 1,
+#     n_jobs: Any | None = None,
+#     verbose: Any | None = None,
+#     **method_kw: Any
 
-# ### Syntax: mne.io.read_raw_edf(r'file', eog=[list of eog channels], preload=True, speed things up, infer_types=True, discover channel types) 
-# #raw = mne.io.read_raw_edf(r'EDF+\103918\103918.edf', eog=['Fp1', 'Fp2'], preload=True, infer_types=True) ##NOTE: YOU MUST watch the capitalization!
-# raw = mne.io.read_raw_edf(
-#     r'EDF+\103918\103918.edf',
-#     #eog=['Fp1', 'Fp2'], # Define eog channels!  I suggest trying making a copy of these as eog1 and eog2
-#     misc=None, # List of channel names to be considered as miscellaneous (MISC) channels.
-#     stim_channel=None,  # Set to None if you don't have a stim channel
-#     exclude=[],  # Exclude channels you don't want
-#     preload=True,  # Preload data into memory to speed things up
-#     infer_types=True,  # Infer channel types from names
-#     verbose=True  # Set verbosity / output messages
-#     )
-# montage = mne.channels.make_standard_montage('standard_1020')
-# raw.set_montage(montage, on_missing='ignore')
-# raw.pick('eeg') # Pick only eeg related data!  However, we still have more data then we need!  We'll plot only the channels we want
-# # raw.plot(picks=(eog_channels + eeg_channels), block=True) #Block must be True if working interactively with a .py file.  Also, we are picking only eeg channels
-
-# print('Lets compare with and without dc removed:')
-# # raw.pick('eeg').plot(picks=(eog_channels + eeg_channels), title = 'Raw Data',block=True, remove_dc=False) # Pick only eeg related data!  However, we still have more data then we need!  We'll plot only the channels we want
-# print('DC removed:')
-# print('Notice that removing the DC drifts\n makes more data fit on the graph!\n\n')
-# # raw.pick('eeg').plot(picks=(eog_channels + eeg_channels), title = 'Raw Data',block=True) # Pick only eeg related data!  However, we still have more data then we need!  We'll plot only the channels we want
-# print("Let's filter the raw so that we can see how much it improves the signal!")
-# filtered = raw.copy().filter(l_freq=1, h_freq=40)
-# # filtered.pick('eeg') # Pick only eeg related data!  However, we still have more data then we need!  We'll plot only the channels we want
-# ica = ICA(n_components=32, random_state=97, max_iter="auto")
-# ica.fit(filtered)
-
-
-# # Find EOG and muscle artifacts
-# eog_indices, eog_scores = ica.find_bads_eog(filtered, ch_name=['Fp1','Fp2'])
-# muscle_noise_indices, muscle_noise_scores = ica.find_bads_muscle(filtered)
-
-# # Exclude the identified artifact components
-# ica.exclude = list(set(eog_indices + muscle_noise_indices))
-
-# # Apply ICA to the raw data
-# filtered_clean = ica.apply(filtered.copy())
-# # raw #Block must be True if working interactively with a .py file.  Also, we are picking only eeg channels
-# filtered_clean.pick('eeg').plot(picks=(eeg_channels), title = 'Filtered Data',block=True)
-
-# # filtered_clean.plot(picks=(eeg_channels), title = 'Interactively Cleaned Data',block=True)
-
-# filtered_clean_interpolated = filtered_clean.copy().interpolate_bads(method='spline')# NOTE: Reset bads = false keeps the bads in the data, just different color!!!
-# filtered_clean_interpolated.plot(picks = eeg_channels ,block=True, title='Interpolated bads')
+# Compute TFR #NOTE: This takes forever if you do the entire dataset!  It will crash if you don't have enough ram!
+# tfr = mne.time_frequency.tfr_multitaper(raw_interpolated, freqs=freqs_array, n_cycles=freqs_array, time_bandwidth=2.0, return_itc=False)
+# tfr.plot(picks=eeg_channels, baseline=(-0.5, 0), mode='logratio', title='TFR')
+# plt.show(block=True)
