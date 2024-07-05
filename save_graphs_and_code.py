@@ -43,8 +43,7 @@ def plot_psd(edf_file, output_directory):
         ica.fit(raw)
 
         # Find EOG and muscle artifacts
-        eog_indices, eog_scores = ica.find_bads_eog(raw, ch_name='Fp2') # NOTE: Can also be Fp1, it all depends
-        muscle_noise_indices, muscle_noise_scores = ica.find_bads_muscle(raw)
+        eog_indices, eog_scores = ica.find_bads_eog(raw, ch_name=['Fp1','Fp2'])        muscle_noise_indices, muscle_noise_scores = ica.find_bads_muscle(raw)
         
         # Exclude the identified artifact components
         ica.exclude = list(set(eog_indices + muscle_noise_indices))

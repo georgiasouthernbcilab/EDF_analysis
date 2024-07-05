@@ -44,12 +44,12 @@ def plot_ica_overlay(edf_file, output_directory):
         ica.fit(raw)
 
         # Find EOG and muscle artifacts
-        fp1_indices, fp1_scores = ica.find_bads_eog(raw, ch_name='Fp1')  # NOTE: Can also be Fp1, it all depends
-        fp2_indices, fp2_scores = ica.find_bads_eog(raw, ch_name='Fp2')  # NOTE: Can also be Fp1, it all depends
+        eog_indices, eog_scores = ica.find_bads_eog(raw, ch_name=['Fp1','Fp2'])  # NOTE: Can also be Fp1, it all depends
+        # fp2_indices, fp2_scores = ica.find_bads_eog(raw, ch_name='Fp2')  # NOTE: Can also be Fp1, it all depends
         muscle_noise_indices, muscle_noise_scores = ica.find_bads_muscle(raw)
         
         # Exclude the identified artifact components
-        ica.exclude = list(set(fp1_indices + fp2_indices + muscle_noise_indices))
+        ica.exclude = list(set(eog_indices + muscle_noise_indices))
         
         # Plot ICA overlay for the whole recording
         fig = ica.plot_overlay(raw, exclude=ica.exclude, picks=eeg_channels, start = 0, stop = 150000, show=False)
