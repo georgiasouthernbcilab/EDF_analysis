@@ -10,7 +10,6 @@ import numpy as np
 visualize_difference = True
 apply_projection = True
 
-
 # Define EEG channels
 eeg_channels = ['Cz', 'Fz', 'Fp1', 'F7', 'F3', 'FC1', 'C3', 'FC5', 'FT9', 'T7', 'CP5', 'CP1', 'P3', 'P7', 'PO9', 'O1', 'Pz', 'Oz', 'O2', 'PO10', 'P8', 'P4', 'CP2', 'CP6', 'T8', 'FT10', 'FC6', 'C4', 'FC2', 'F4', 'F8', 'Fp2']
 # Frequencies of interest for EEG analysis
@@ -61,7 +60,6 @@ raw.filter(l_freq=1, h_freq=40)  # Apply band-pass filter
 raw.plot(picks=eeg_channels,block=True)
 
 
-
 # Define your message and instructions
 message = "Now Interpolating!"
 instructions = """
@@ -77,6 +75,7 @@ show_message_plot(message, instructions)
 print(f'bads: {raw.info["bads"]}')
 # raw_interpolated = raw.copy().interpolate_bads(reset_bads=False)# NOTE: Reset bads = false keeps the bads in the data, just different color!!!
 raw_interpolated = raw.copy().interpolate_bads(method='spline')# NOTE: Reset bads = false keeps the bads in the data, just different color!!!
+
 raw_interpolated.plot(picks = eeg_channels ,block=True, title='Interpolated bads')
 
 # Compute and plot PSD
