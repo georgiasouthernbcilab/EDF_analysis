@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Read your EDF file
-raw = mne.io.read_raw_edf(r'EDF+\103918\103918.edf', preload=True)
+raw = mne.io.read_raw_edf(r'EDF+\254362\254362.edf', preload=True)
 print(f"Raw data loaded. Number of channels: {len(raw.ch_names)}, Sampling frequency: {raw.info['sfreq']} Hz")
 
 # Select EEG channels
