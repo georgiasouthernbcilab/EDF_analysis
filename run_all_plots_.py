@@ -6,9 +6,9 @@ plot_ica_overlay = False
 plot_topomap = True
 dB=True
 normalize = True
-
+n_components = 30
 output_directory = 'all_plots'
-description = f'mt_{muscle_threshold}eogt_{eog_threshold}db_{dB}_nrmlizd_{normalize}'  # Put a nice description here as it gets saved in the output directory name and code output file
+description = f'mt_{muscle_threshold}eogt_{eog_threshold}db_{dB}_nrmlizd_{normalize}_cmp_{n_components}'  # Put a nice description here as it gets saved in the output directory name and code output file
 
 import os  # Handy OS functions, explore file directory, etc.
 import glob  # Useful to grab the EDF files easily
@@ -95,7 +95,7 @@ def generate_plots(edf_file, output_directory):
         # Set up ICA
         ica = ICA(
             # n_components=30,
-            n_components=32,
+            n_components=n_components,
             #noise_cov = 
             #method =
             # fit_params = 
