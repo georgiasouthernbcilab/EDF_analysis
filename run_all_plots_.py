@@ -1,8 +1,8 @@
 muscle_threshold = 0.6 #0.5
 eog_threshold = 4 #3
 apply_proj = False
-plot_psd = True
-plot_ica_overlay = False 
+plot_psd = True # Generate and save PSD plots?
+plot_ica_overlay = False # Plot before and after effects of ica cleaning
 plot_topomap = True
 dB=True
 normalize = True
@@ -69,7 +69,7 @@ def generate_plots(edf_file, output_directory):
         if apply_proj:
             raw.apply_proj()
         raw.filter(
-            l_freq=0.1, 
+            l_freq=1.0, 
             h_freq=40,
             picks=eeg_channels,
             n_jobs = 4,            
