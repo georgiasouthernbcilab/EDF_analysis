@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://camdenwahl.github.io/EDF_analysis",
+  "homepage": "https://georgiasouthernbcilab.github.io/EDF_analysis",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
