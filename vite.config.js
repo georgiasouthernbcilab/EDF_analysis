@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  base: '/EDF_analysis/'
+  base: '/EDF_analysis/',
+  plugins: [react()]
 })
