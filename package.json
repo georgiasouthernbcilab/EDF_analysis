@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://georgiasouthernbcilab.github.io/EDF_analysis",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
