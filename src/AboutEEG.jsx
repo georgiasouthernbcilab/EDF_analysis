@@ -6,9 +6,9 @@ function AboutEEG() {
 
     useEffect(() => {
         const imageSources = [
-            '/example_eeg.png',
-            '/bad_electrode_contact.png',
-            '/the-10-10-system-new.png'
+            './example_eeg.png',
+            './bad_electrode_contact.png',
+            './the-10-10-system-new.png'
         ];
 
         const loadImages = imageSources.map(src => {
