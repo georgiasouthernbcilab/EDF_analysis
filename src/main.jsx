@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
-  createBrowserRouter,
+  HashRouter,
   RouterProvider,
 } from "react-router-dom";
 import Navigation from './Navigation.jsx';
@@ -12,7 +12,7 @@ import Home from './Home.jsx';
 import Preprocessing_2 from './Preprocessing_2.jsx';
 import Preprocessing_3 from './Preprocessing_3.jsx';
 
-const router = createBrowserRouter([
+const router = HashRouter([
   {
     path: "/",
     element: 
