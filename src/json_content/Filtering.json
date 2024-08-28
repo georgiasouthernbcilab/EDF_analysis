@@ -1,0 +1,3 @@
+{
+    "pOne": "Filtering is happening at all stages in the EEG process. From the time you begin recording an EEG, you or the manufacturer should have already set up some parameters that disclose your frequency range of interest. Typically, you want to get all the frequencies as close to 0 Hz as possible and can capture frequencies up to half your sampling rate, which is known as your nyquist frequency."
+}

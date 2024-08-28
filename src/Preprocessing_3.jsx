@@ -16,12 +16,12 @@ function Preprocessing_3() {
             <div className="flex flex-col items-center mt-4">
                 <h1 className="text-4xl p-4 m-2">Preprocessing 3</h1>
                 <div className="p-4 m-2 w-2/3">
-                    <p className="mt-10 mb-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This page details the advanced preprocessing steps for EEG data using MNE-Python. The steps include applying projections, filtering, interpolating bad channels, and visualizing differences.
                     </p>
 
                     <h2 className="text-3xl p-4 m-2">1. Import Libraries and Define Parameters</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         In this section, we import essential libraries such as MNE for EEG processing and matplotlib for plotting. We also define basic parameters and EEG channels for our analysis.
                     </p>
                     <pre><code className="language-python">
@@ -57,7 +57,7 @@ for band in freqs.values():
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">2. Load and Prepare EEG Data</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This section loads the EEG data from an EDF file and selects only the specified EEG channels. The montage is then set according to the 10-20 system.
                     </p>
                     <pre><code className="language-python">
@@ -75,7 +75,7 @@ raw.set_montage(montage, on_missing='ignore')
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">3. Initial Visualization and Annotation</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         We provide initial instructions to the user to review the data and annotate any anomalies. This step helps in identifying bad channels that need further preprocessing.
                     </p>
                     <pre><code className="language-python">
@@ -103,7 +103,7 @@ raw.plot(picks=eeg_channels, block=True)
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">4. Interpolation of Bad Channels</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         Interpolation is applied to bad channels identified in the previous step. This process estimates the values of bad channels based on the surrounding good channels.
                     </p>
                     <pre><code className="language-python">
@@ -127,7 +127,7 @@ raw_interpolated.plot(picks=eeg_channels, block=True, title='Interpolated bads')
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">5. Power Spectral Density (PSD) Analysis</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         After interpolation, we compute and plot the Power Spectral Density (PSD) of the EEG data. This helps in visualizing the power distribution across different frequency bands.
                     </p>
                     <pre><code className="language-python">
@@ -144,7 +144,7 @@ data_interp = raw_interpolated.get_data() * 1e6  # Convert to microvolts
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">6. Visualization of Differences</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         If the `visualize_difference` flag is set to True, this section plots the original and interpolated EEG data for comparison. It highlights the differences between the original and processed signals.
                     </p>
                     <pre><code className="language-python">
@@ -168,7 +168,7 @@ print('Visualized difference')
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">7. Detection and Annotation of EOG Artifacts</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This section detects EOG (Electrooculography) artifacts such as blinks and annotates them in the EEG data. These annotations help in identifying and handling these artifacts during further analysis.
                     </p>
                     <pre><code className="language-python">
@@ -184,7 +184,7 @@ print('Plotted events difference')
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">8. Time-Frequency Representation (TFR)</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         Although commented out in the code, this section outlines the steps for computing Time-Frequency Representation (TFR) using the multitaper method. TFR provides a detailed view of how power varies with both time and frequency.
                     </p>
                     <pre><code className="language-python">

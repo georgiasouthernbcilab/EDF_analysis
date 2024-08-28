@@ -17,12 +17,12 @@ function Preprocessing_2() {
             <div className="flex flex-col items-center mt-4">
                 <h1 className="text-4xl p-4 m-2">Preprocessing 2</h1>
                 <div className="p-4 m-2 w-2/3">
-                    <p className="mt-10 mb-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         Here, we will walk through the preprocessing and analysis steps using MNE-Python for EEG data. The code includes loading EDF files, applying filters, performing ICA, and generating various plots.
                     </p>
 
                     <h2 className="text-3xl p-4 m-2">1. Import Libraries and Define Parameters</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         In this section, we import essential libraries such as MNE for EEG processing and matplotlib for plotting. We also define key parameters like thresholds for artifact detection, flags for plotting options, and the number of ICA components to use.
                     </p>
                     <pre><code className="language-python">
@@ -49,7 +49,7 @@ description = f'mt_{muscle_threshold}eogt_{eog_threshold}db_{dB}_nrmlizd_{normal
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">2. Define EEG and EOG Channels</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         We specify the EEG and EOG channels that will be used for our analysis. These channels are essential for correctly identifying and processing the EEG and EOG data.
                     </p>
                     <pre><code className="language-python">
@@ -60,7 +60,7 @@ eog_channels = ['Fp1', 'Fp2']
 
                     <h2 className="text-3xl p-4 m-2">3. Define Helper Functions</h2>
                     <h3 className="text-2xl p-2 m-2">Sanitize Filename</h3>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This helper function sanitizes filenames by replacing invalid characters, ensuring that filenames are safe to use within the file system.
                     </p>
                     <pre><code className="language-python">
@@ -72,7 +72,7 @@ eog_channels = ['Fp1', 'Fp2']
                     </code></pre>
 
                     <h3 className="text-2xl p-2 m-2">Save Script Copy</h3>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This function saves a copy of the current script in the output directory. This is useful for keeping a record of the exact code that was used to generate the analysis results.
                     </p>
                     <pre><code className="language-python">
@@ -89,7 +89,7 @@ eog_channels = ['Fp1', 'Fp2']
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">4. Load and Preprocess EDF Files</h2>
-                    <p className="mt-5">
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
                         This function handles the loading of EEG data from an EDF file, applying necessary filters, performing Independent Component Analysis (ICA) to identify and remove artifacts, and generating Power Spectral Density (PSD) and topomap plots. It ensures the EEG data is clean and ready for further analysis.
                     </p>
                     <pre><code className="language-python">
@@ -232,8 +232,8 @@ eog_channels = ['Fp1', 'Fp2']
                     </code></pre>
 
                     <h2 className="text-3xl p-4 m-2">5. Find and Process EDF Files</h2>
-                    <p className="mt-5">
-                        This section includes functions to find all EDF files in the specified directory and process each one by one, ensuring each file is analyzed and the results are saved appropriately.
+                    <p className="bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5">
+                        This section inc"bg-[#FFF6F6] rounded p-2 break-words mt-10 mb-5"ludes functions to find all EDF files in the specified directory and process each one by one, ensuring each file is analyzed and the results are saved appropriately.
                     </p>
                     <pre><code className="language-python">
 {`def find_edf_files(parent_directory):

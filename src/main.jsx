@@ -11,6 +11,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 import Home from './Home.jsx';
 import Preprocessing_2 from './Preprocessing_2.jsx';
 import Preprocessing_3 from './Preprocessing_3.jsx';
+import Filtering from './Filtering.jsx';
 
 // Create a hash router
 const router = createHashRouter([
@@ -59,6 +60,15 @@ const router = createHashRouter([
       </>
     ),
   },
+  {
+    path: "/Filtering",
+    element: (
+      <>
+      <Navigation />
+      <Filtering />
+      </>
+    )
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
