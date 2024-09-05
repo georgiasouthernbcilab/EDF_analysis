@@ -1,6 +1,6 @@
 muscle_threshold = 0.6 #0.5
 eog_threshold = 4 #3
-apply_proj = False
+apply_proj = False #Use same settings globally
 plot_psd = True # Generate and save PSD plots?
 plot_ica_overlay = False # Plot before and after effects of ica cleaning
 plot_topomap = True
@@ -57,7 +57,7 @@ def generate_plots(edf_file, output_directory):
         # raw.set_montage(montage, on_missing='raise') # Set locations and handle error
         raw.set_eeg_reference(
             ref_channels = "average",
-            projection = apply_proj,
+            projection = apply_proj, # Use same settings globally
             #projection=True,  
             ch_type = "eeg",
             # ch_type = "auto",
@@ -66,8 +66,8 @@ def generate_plots(edf_file, output_directory):
             verbose = False
             )# Set EEG average reference and apply band-pass filter
         
-        if apply_proj:
-            raw.apply_proj()
+        if apply_proj: # Use same settings globally
+            raw.apply_proj() 
         raw.filter(
             l_freq=1.0, 
             h_freq=40,
@@ -159,7 +159,7 @@ def generate_plots(edf_file, output_directory):
             tmax=None, 
             buffer_size_sec=None, 
             drop_small_buffer=False, 
-            proj=False, 
+            proj=apply_proj, # Use same settings globally
             fmt='single', 
             overwrite=False, 
             split_size='2GB', 
@@ -245,7 +245,7 @@ def generate_plots(edf_file, output_directory):
                 tmax=None, 
                 buffer_size_sec=None, 
                 drop_small_buffer=False, 
-                proj=False, 
+                proj=apply_proj, # Use same settings globally
                 fmt='single', 
                 overwrite=False, 
                 split_size='2GB', 
