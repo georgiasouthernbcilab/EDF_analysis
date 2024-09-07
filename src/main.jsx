@@ -12,6 +12,7 @@ import Home from './Home.jsx';
 import Preprocessing_2 from './Preprocessing_2.jsx';
 import Preprocessing_3 from './Preprocessing_3.jsx';
 import Filtering from './Filtering.jsx';
+import Timevsfrequency from './Timevsfrequency.jsx';
 
 // Create a hash router
 const router = createHashRouter([
@@ -61,6 +62,15 @@ const router = createHashRouter([
     ),
   },
   {
+    path: "/Timevsfrequency",
+    element: (
+      <>
+      <Navigation />
+      <Timevsfrequency/>
+      </>
+    )
+  },
+  {
     path: "/Filtering",
     element: (
       <>
@@ -68,7 +78,7 @@ const router = createHashRouter([
       <Filtering />
       </>
     )
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

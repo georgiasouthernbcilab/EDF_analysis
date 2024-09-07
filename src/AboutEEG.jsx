@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function AboutEEG() {
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -48,7 +49,10 @@ function AboutEEG() {
                 <p className="bg-[#FFF6F6] rounded p-2 break-words">
                     To properly start the preprocessing stage, you&apos;ll need to understand electrode position conventions. Please review the <a href="https://en.wikipedia.org/wiki/10%E2%80%9320_system_(EEG)" target='_blank' className="text-[#598392]">10-20 system.</a> We will be working under the assumption of this principle and our analysis in MNE-Python will also adhere to the 10-20 system.
                 </p>
-                <img src="./the-10-10-system-new.png" alt="The 10-20 System" className="w-full mt-2" />
+                <img src="./the-10-10-system-new.png" alt="The 10-20 System" className="w-full mt-2 mb-6" />
+                <p className="bg-[#FFF6F6] rounded p-2 break-words">
+                    When working with EEG systems and analyzing its contents, its important to discern and understand the units you are working with and what domain you need to operate in. Please visit <Link to = "/Timevsfrequency"  className="text-[#598392] mb-10">Frequency vs. Time Domain</Link> to get an understanding of the very basics and some background information. For deeper analysis, it is good to explore further into these concepts.
+                </p>
             </div>
         </div>
     );
