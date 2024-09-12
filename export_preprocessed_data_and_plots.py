@@ -4,9 +4,9 @@ apply_proj = False #Use same settings globally
 plot_psd = True # Generate and save PSD plots?
 plot_ica_overlay = False # Plot before and after effects of ica cleaning
 plot_topomap = True
-dB=True
+dB = True
 normalize = True
-n_components = 30
+n_components = 5
 output_directory = 'all_plots'
 description = f'mt_{muscle_threshold}eogt_{eog_threshold}db_{dB}_nrmlizd_{normalize}_cmp_{n_components}'  # Put a nice description here as it gets saved in the output directory name and code output file
 
@@ -25,7 +25,6 @@ eog_channels=['Fp1', 'Fp2']
 # Try and edit required z scores for the data, as it will affect filtering a lot!
 # the EOG indicies and such
 # may be nice to iterate through variations and plot them!
-
 
 def sanitize_filename(filename):
     
