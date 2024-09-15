@@ -7,7 +7,7 @@ eeg_channels = ['Cz', 'Fz', 'Fp1', 'F7', 'F3', 'FC1', 'C3', 'FC5', 'FT9', 'T7', 
 
 # Read your EDF file
 raw = raw = mne.io.read_raw_edf(
-    r'EDF+\254362\254362.edf',
+    r'EDF+\712563\712563.edf',
     #eog=['Fp1', 'Fp2'], # Define eog channels!  I suggest trying making a copy of these as eog1 and eog2 ##NOTE: YOU MUST watch the capitalization!
     misc=None, # List of channel names to be considered as miscellaneous (MISC) channels.
     stim_channel=None,  # Set to None if you don't have a stim channel

@@ -3,8 +3,8 @@ from mne.preprocessing import ICA, create_eog_epochs
 
 # Read your EDF file
 # optionally use all channels to use .mot for example
-#raw = mne.io.read_raw_edf(
-    r'EDF+\254362\254362.edf',
+ mne.io.read_raw_edf(
+    r'EDF+\712563\712563.edf',
     #eog=['Fp1', 'Fp2'], # Define eog channels!  I suggest trying making a copy of these as eog1 and eog2 ##NOTE: YOU MUST watch the capitalization!
     misc=None, # List of channel names to be considered as miscellaneous (MISC) channels.
     stim_channel=None,  # Set to None if you don't have a stim channel
@@ -16,7 +16,7 @@ from mne.preprocessing import ICA, create_eog_epochs
 
 
 raw = mne.io.read_raw_edf(
-    r'EDF+\254362\254362.edf',
+    r'EDF+\712563\712563.edf',
     #eog=['Fp1', 'Fp2'], # Define eog channels!  I suggest trying making a copy of these as eog1 and eog2 ##NOTE: YOU MUST watch the capitalization!
     misc=None, # List of channel names to be considered as miscellaneous (MISC) channels.
     stim_channel=None,  # Set to None if you don't have a stim channel
